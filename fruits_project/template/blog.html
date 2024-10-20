@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  News Page
+{% endblock title %}
+
+{% block content %}
+
+
+<style>
+    .latest-news {
+        margin-top: 150px;
+        margin-bottom: 150px;
+    }
+    .latest-news-bg {
+        height: 200px; /* Fixed height for the background image */
+        background-size: cover;
+        background-position: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .single-latest-news {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Make all cards equal in height */
+        border: 1px solid #ddd; /* Optional border for consistency */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for better appearance */
+        overflow: hidden;
+        transition: transform 0.3s ease; /* Smooth scaling on hover */
+    }
+    .single-latest-news:hover {
+        transform: scale(1.05); /* Scale up slightly on hover */
+    }
+    .news-text-box {
+        padding: 20px;
+        background-color: #fff;
+        flex: 1;
+    }
+    .excerpt {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .read-more-btn {
+        color: #ff6347; /* Custom color for the read more button */
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .read-more-btn:hover {
+        color: #ff4500; /* Darker shade on hover */
+        text-decoration: none;
+    }
+</style>
+
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search arewa -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Organic Information</p>
+						<h1>News Article</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- latest news -->
+	<div class="latest-news mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				{% for all_blog in all_blog %}
+				<div class="col-lg-4 col-md-6 mb-5">
+					<div class="single-latest-news">
+						<a href="single-news.html"><div class="latest-news-bg news-bg-1 "  style="background-image: url({{all_blog.image.url}});"></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">{{all_blog.title}}</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> {{all_blog.author}}</span>
+								<span class="date"><i class="fas fa-calendar"></i> {{all_blog.created_at | date:'M d, Y'}}</span>
+							</p>
+							<p class="excerpt">{{all_blog.content}}</p>
+							<a href=single-blog.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="pagination-wrap">
+								<ul>
+									<li><a href="#">Prev</a></li>
+									<li><a href="#">1</a></li>
+									<li><a class="active" href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">Next</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end latest news -->
+
+	<!-- logo carousel -->
+	<div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+						<img src="{% static 'assets/img/company-logos/1.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+						<img src="{% static 'assets/img/company-logos/2.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+						<img src="{% static 'assets/img/company-logos/3.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+						<img src="{% static 'assets/img/company-logos/4.png' %}" alt="">
+						</div>
+						<div class="single-logo-item">
+						<img src="{% static 'assets/img/company-logos/5.png' %}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end logo carousel -->
+{% endblock %}
